@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wassime Wi - Freelancer Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* --- CSS VARIABLES & GLOBAL STYLES --- */
+:root {
+    --background: #0a0a0a;
+    --text-primary: #e5e5e5;
+    --text-secondary: #a3a3a3;
+    --accent: #007BFF;
+    --surface: rgba(255, 255, 255, 0.03);
+    --surface-hover: rgba(255, 255, 255, 0.07);
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    color: var(--text-primary);
+    line-height: 1.7;
+}
+
+/* --- NAVIGATION --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    animation: fadeIn 1s ease-in-out;
+}
+
+nav .logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+nav ul li a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--accent);
+}
+
+/* --- HEADER --- */
+header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-content {
+    animation: fadeInUp 1s ease-out;
+}
+
+header h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+header h1 span {
+    color: var(--accent);
+}
+
+header p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 14px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 123, 255, 0.2);
+}
+
+/* --- SECTIONS --- */
+section {
+    padding: 100px 2rem;
+    max-width: 1200px;
+    margin: auto;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 2px;
+}
+
+/* --- ABOUT --- */
+#about {
+    text-align: center;
+}
+
+#about p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--text-secondary);
+}
+
+/* --- SKILLS --- */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-card {
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-8px);
+    background: var(--surface-hover);
+}
+
+.skill-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.skill-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* --- HORIZONTAL PORTFOLIO SECTION --- */
+.portfolio-container {
+    overflow-x: auto;
+    white-space: nowrap; /* Prevents wrapping of inline-block elements */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    padding-bottom: 20px; /* Space for the scrollbar */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: var(--accent) var(--background); /* For Firefox */
+    margin-left: calc((100% - 1200px) / -2); /* Allows content to bleed to screen edge */
+    margin-right: calc((100% - 1200px) / -2);
+    padding-left: calc((100% - 1200px) / 2); /* Re-adds padding */
+    padding-right: calc((100% - 1200px) / 2);
+}
+
+/* Custom Scrollbar for Chrome, Safari, Opera */
+.portfolio-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.portfolio-container::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 10px;
+}
+
+.portfolio-container::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    border-radius: 10px;
+    border: 2px solid #1a1a1a;
+}
+
+.portfolio-grid-horizontal {
+    display: inline-flex; /* Use inline-flex for horizontal layout */
+    gap: 2rem;
+    padding: 10px 0;
+}
+
+.project-card {
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal; /* Reset white-space for card content */
+    width: 340px; /* Fixed width for each card */
+    flex-shrink: 0; /* Prevents cards from shrinking */
+    background: var(--surface);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.project-image {
+    height: 240px;
+    background-size: cover;
+    background-position: center;
+}
+
+.project-content {
+    padding: 1.5rem;
+}
+
+.project-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.project-content p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.project-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.project-link:hover {
+    text-decoration: underline;
+}
+
+
+/* --- CONTACT --- */
+#contact .contact-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#contact p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.contact-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.contact-links a:hover {
+    color: var(--accent);
+}
+
+/* --- FOOTER --- */
+footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* --- ANIMATIONS & RESPONSIVE --- */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 1200px) {
+    .portfolio-container {
+        margin-left: -2rem;
+        margin-right: -2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    nav { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+    .section-title { font-size: 2.2rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">W.</div>
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="header-content">
+        <h1>Wassime Wi — <span>Creative Developer</span></h1>
+        <p>Building high-performance web applications with a focus on user experience and robust backend solutions.</p>
+        <a href="#portfolio" class="cta-button">View My Work</a>
+    </div>
+</header>
+
+<main>
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <p>I build fast, secure, and modern web applications. From scalable streaming platforms to advanced PDF tools, I turn ideas into products that deliver results and improve user experience.</p>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">My Expertise</h2>
+        <div class="skills-container">
+            <div class="skill-card">
+                <h3>Laravel & PHP</h3>
+                <p>Robust backend development with clean architecture and APIs.</p>
+            </div>
+            <div class="skill-card">
+                <h3>React & Vue.js</h3>
+                <p>Modern UI development with real-time updates and smooth UX.</p>
+            </div>
+           
+            <div class="skill-card">
+                <h3>PDF Tools</h3>
+                <p>Conversion, merging, splitting, and automation of PDF workflows.</p>
+            </div>
+            
+            <div class="skill-card">
+                <h3>MySQL & Databases</h3>
+                <p>Optimized queries and database design for performance.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <h2 class="section-title">Selected Projects</h2>
+        <div class="portfolio-container">
+            <div class="portfolio-grid-horizontal">
+                <div class="project-card">
+                    <div class="project-image" style="background-image: url('1.png');"></div>
+                    <div class="project-content">
+                        <h3>Streaming Platform</h3>
+                        <p>A modern video streaming service with live broadcasts, VOD, and multi-device support built with Laravel, React, and WebRTC.</p>
+                        <a href="#" class="project-link">View Details →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image" style="background-image: url('2.png');"></div>
+                    <div class="project-content">
+                        <h3>PDF Tools Web App</h3>
+                        <p>All-in-one platform for PDF conversion, merging, splitting, and secure document sharing, optimized for speed and usability.</p>
+                         <a href="#" class="project-link">View Details →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image" style="background-image: url('3.png');"></div>
+                    <div class="project-content">
+                        <h3>Services Shop</h3>
+                        <p>An online marketplace for digital services with secure payments, custom orders, and a smooth customer dashboard.</p>
+                         <a href="#" class="project-link">View Details →</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+         <div class="contact-content">
+            <h2 class="section-title">Get In Touch</h2>
+            <p>I'm currently available for freelance projects and new opportunities. Feel free to reach out to discuss your ideas.</p>
+             <div class="contact-links">
+                 <a href="mailto:bwasssimeahmad@example.com">bwassimeahamd@example.com</a>
+                 <a href="https://www.fiverr.com/yourusername" target="_blank">Fiverr</a>
+                 <a href="#" target="_blank">LinkedIn</a>
+             </div>
+            <a href="mailto:youremail@example.com" class="cta-button">Hire Me Now</a>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Wassime Wi. All rights reserved. Styled with inspiration and code.</p>
+</footer>
+
+<script>
+// JavaScript for scroll animations
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('section');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1 // Triggers when 10% of the element is visible
+    });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
+</script>
+
+</body>
+</html>
